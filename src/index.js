@@ -4,6 +4,8 @@ import axios from "axios";
 import {useDarkMode}from './hooks/useDarkMode';
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+import Anchovy from "./components/anchovy"
 
 import "./styles.scss";
 
@@ -20,11 +22,16 @@ const App = () => {
   }, []);
   return (
     <div className="App">
+      <Route exact path="/">
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode}/>
       <Charts coinData={coinData} darkMode={darkMode}/>
+      </Route>
+      <Route exact path="/anchovy">
+        <Anchovy/>
+      </Route>
     </div>
   );
 };
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<Router><App /></Router>, rootElement);
